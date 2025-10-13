@@ -1,0 +1,45 @@
+#!/usr/bin/env bpftrace
+
+/*
+ * process_fork.bt - Fork Tracepoint Example
+ *
+ * This script monitors process creation (fork) events using kernel tracepoints.
+ * It demonstrates how to use static instrumentation points defined in the kernel
+ * to track when new processes are created.
+ *
+ * Usage: sudo bpftrace process_fork.bt
+ */
+
+BEGIN
+{
+    printf("Monitoring process fork events... Hit Ctrl-C to end.\n");
+    printf("%-10s %-16s %-10s %-16s\n", 
+           "TIME", "PARENT", "PARENT_PID", "CHILD_PID");
+}
+
+// Hook into the sched:sched_process_fork tracepoint
+tracepoint:sched:sched_process_fork
+{
+    @fork_count++;
+    
+    printf("%-10s %-16s %-10d %-16d\n",
+           strftime("%H:%M:%S", nsecs),
+           args->parent_comm,
+           args->parent_pid,
+           args->child_pid);
+    
+    // Track per-process fork counts
+    @forks_by_process[args->parent_comm] = count();
+}
+
+END
+{
+    printf("\n\n=== Fork Statistics ===\n");
+    printf("Total fork events: %d\n\n", @fork_count);
+    
+    printf("Forks by process:\n");
+    print(@forks_by_process);
+    
+    clear(@fork_count);
+    clear(@forks_by_process);
+}
