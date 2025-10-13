@@ -1,0 +1,61 @@
+#!/usr/bin/env bpftrace
+
+/*
+ * openat_count.bt - Map Usage Example
+ *
+ * This script counts how many times each process calls the openat() system call.
+ * It demonstrates the use of eBPF maps for data aggregation and kprobes for
+ * hooking into kernel functions.
+ *
+ * Usage: sudo bpftrace openat_count.bt
+ */
+
+BEGIN
+{
+    printf("Counting openat() calls by process... Hit Ctrl-C to end.\n");
+}
+
+// Hook into the openat system call using kprobe
+kprobe:do_sys_openat2
+{
+    // Count total openat calls
+    @total_openat++;
+    
+    // Count openat calls per process name
+    @openat_by_comm[comm] = count();
+    
+    // Count openat calls per PID
+    @openat_by_pid[pid] = count();
+    
+    // Store the filename being opened (limited to first 32 chars)
+    @files_opened[str(arg1)] = count();
+}
+
+// Alternative tracepoint-based approach for openat
+tracepoint:syscalls:sys_enter_openat
+{
+    @openat_tracepoint++;
+}
+
+END
+{
+    printf("\n\n=== OpenAt System Call Statistics ===\n");
+    printf("Total openat calls (kprobe): %d\n", @total_openat);
+    printf("Total openat calls (tracepoint): %d\n\n", @openat_tracepoint);
+    
+    printf("Top 10 processes by openat count:\n");
+    print(@openat_by_comm, 10);
+    
+    printf("\nTop 10 PIDs by openat count:\n");
+    print(@openat_by_pid, 10);
+    
+    printf("\nTop 10 most frequently opened files:\n");
+    print(@files_opened, 10);
+    
+    // Clean up maps
+    clear(@total_openat);
+    clear(@openat_tracepoint);
+    clear(@openat_by_comm);
+    clear(@openat_by_pid);
+    clear(@files_opened);
+}
