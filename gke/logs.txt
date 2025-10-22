@@ -1,0 +1,739 @@
+gcloud container clusters create cluster1 \
+  --zone=us-east1-c \
+  --enable-ip-alias \
+  --machine-type=e2-standard-4 \
+  --num-nodes=1 \
+  --workload-pool=qwiklabs-gcp-04-74f941ebf170.svc.id.goog \
+  --release-channel=regular \
+  --project=qwiklabs-gcp-04-74f941ebf170 --async
+
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ gcloud container clusters create cluster3 \
+  --zone=us-central1-c \
+  --enable-ip-alias \
+  --machine-type=e2-standard-4 \
+  --num-nodes=1 \
+  --workload-pool=qwiklabs-gcp-04-74f941ebf170.svc.id.goog \
+  --release-channel=regular \
+  --project=qwiklabs-gcp-04-74f941ebf170
+Creating cluster cluster3 in us-central1-c... Cluster is being health-checked (Kubernetes Control Plane is healthy)...done.                                                                                                                  
+Created [https://container.googleapis.com/v1/projects/qwiklabs-gcp-04-74f941ebf170/zones/us-central1-c/clusters/cluster3].
+To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/us-central1-c/cluster3?project=qwiklabs-gcp-04-74f941ebf170
+kubeconfig entry generated for cluster3.
+NAME: cluster3
+LOCATION: us-central1-c
+MASTER_VERSION: 1.33.5-gke.1080000
+MASTER_IP: 136.112.49.190
+MACHINE_TYPE: e2-standard-4
+NODE_VERSION: 1.33.5-gke.1080000
+NUM_NODES: 1
+STATUS: RUNNING
+STACK_TYPE: IPV4
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ gcloud container fleet memberships register cluster1 \
+  --gke-cluster us-east1-c/cluster1 \
+  --enable-workload-identity \
+  --project=qwiklabs-gcp-04-74f941ebf170
+
+gcloud container fleet memberships register cluster2 \
+    --gke-cluster us-east1-c/cluster2 \
+    --enable-workload-identity \
+    --project=qwiklabs-gcp-04-74f941ebf170
+
+gcloud container fleet memberships register cluster3 \
+    --gke-cluster us-central1-c/cluster3 \
+    --enable-workload-identity \
+    --project=qwiklabs-gcp-04-74f941ebf170
+Membership [projects/qwiklabs-gcp-04-74f941ebf170/locations/us-east1/memberships/cluster1] already registered with the cluster [//container.googleapis.com/projects/qwiklabs-gcp-04-74f941ebf170/locations/us-east1-c/clusters/cluster1] in the Fleet.
+Finished registering to the Fleet.
+Membership [projects/qwiklabs-gcp-04-74f941ebf170/locations/us-east1/memberships/cluster2] already registered with the cluster [//container.googleapis.com/projects/qwiklabs-gcp-04-74f941ebf170/locations/us-east1-c/clusters/cluster2] in the Fleet.
+Finished registering to the Fleet.
+Membership [projects/qwiklabs-gcp-04-74f941ebf170/locations/us-central1/memberships/cluster3] already registered with the cluster [//container.googleapis.com/projects/qwiklabs-gcp-04-74f941ebf170/locations/us-central1-c/clusters/cluster3] in the Fleet.
+Finished registering to the Fleet.
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ gcloud container fleet multi-cluster-services describe --project=qwiklabs-gcp-04-74f941ebf170
+createTime: '2025-10-22T03:22:33.267724231Z'
+name: projects/qwiklabs-gcp-04-74f941ebf170/locations/global/features/multiclusterservicediscovery
+resourceState:
+  state: ACTIVE
+spec: {}
+updateTime: '2025-10-22T03:22:37.907694910Z'
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ gcloud container fleet multi-cluster-services describe --project=qwiklabs-gcp-04-74f941ebf170
+createTime: '2025-10-22T03:22:33.267724231Z'
+name: projects/qwiklabs-gcp-04-74f941ebf170/locations/global/features/multiclusterservicediscovery
+resourceState:
+  state: ACTIVE
+spec: {}
+updateTime: '2025-10-22T03:22:37.907694910Z'
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ gcloud container fleet multi-cluster-services describe --project=qwiklabs-gcp-04-74f941ebf170
+createTime: '2025-10-22T03:22:33.267724231Z'
+name: projects/qwiklabs-gcp-04-74f941ebf170/locations/global/features/multiclusterservicediscovery
+resourceState:
+  state: ACTIVE
+spec: {}
+updateTime: '2025-10-22T03:22:37.907694910Z'
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ gcloud container fleet multi-cluster-services describe --project=qwiklabs-gcp-04-74f941ebf170
+createTime: '2025-10-22T03:22:33.267724231Z'
+name: projects/qwiklabs-gcp-04-74f941ebf170/locations/global/features/multiclusterservicediscovery
+resourceState:
+  state: ACTIVE
+spec: {}
+updateTime: '2025-10-22T03:22:37.907694910Z'
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ gcloud container fleet multi-cluster-services describe --project=qwiklabs-gcp-04-74f941ebf170
+createTime: '2025-10-22T03:22:33.267724231Z'
+name: projects/qwiklabs-gcp-04-74f941ebf170/locations/global/features/multiclusterservicediscovery
+resourceState:
+  state: ACTIVE
+spec: {}
+updateTime: '2025-10-22T03:22:37.907694910Z'
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ gcloud container fleet multi-cluster-services describe --project=qwiklabs-gcp-04-74f941ebf170
+createTime: '2025-10-22T03:22:33.267724231Z'
+membershipStates:
+  projects/412498475841/locations/us-central1/memberships/cluster3:
+    state:
+      code: OK
+      description: Firewall successfully updated
+      updateTime: '2025-10-22T03:25:45.133803172Z'
+  projects/412498475841/locations/us-east1/memberships/cluster1:
+    state:
+      code: OK
+      description: Firewall successfully updated
+      updateTime: '2025-10-22T03:25:48.699596433Z'
+  projects/412498475841/locations/us-east1/memberships/cluster2:
+    state:
+      code: OK
+      description: Firewall successfully updated
+      updateTime: '2025-10-22T03:25:59.608222865Z'
+name: projects/qwiklabs-gcp-04-74f941ebf170/locations/global/features/multiclusterservicediscovery
+resourceState:
+  state: ACTIVE
+spec: {}
+updateTime: '2025-10-22T03:22:37.907694910Z'
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ gcloud container fleet ingress enable \
+  --config-membership=cluster1 \
+  --project=qwiklabs-gcp-04-74f941ebf170 \
+  --location=us-east1
+Ingress Feature for project [qwiklabs-gcp-04-74f941ebf170] is already enabled
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ gcloud container fleet ingress describe --project=qwiklabs-gcp-04-74f941ebf170
+createTime: '2025-10-22T03:24:06.091824237Z'
+membershipStates:
+  projects/412498475841/locations/us-central1/memberships/cluster3:
+    state:
+      code: OK
+      updateTime: '2025-10-22T03:25:08.626812047Z'
+  projects/412498475841/locations/us-east1/memberships/cluster1:
+    state:
+      code: OK
+      updateTime: '2025-10-22T03:25:08.626812803Z'
+  projects/412498475841/locations/us-east1/memberships/cluster2:
+    state:
+      code: OK
+      updateTime: '2025-10-22T03:25:08.626813638Z'
+name: projects/qwiklabs-gcp-04-74f941ebf170/locations/global/features/multiclusteringress
+resourceState:
+  state: ACTIVE
+spec:
+  multiclusteringress:
+    configMembership: projects/qwiklabs-gcp-04-74f941ebf170/locations/us-east1/memberships/cluster1
+state:
+  state:
+    code: OK
+    description: Ready to use
+    updateTime: '2025-10-22T03:25:07.927020918Z'
+updateTime: '2025-10-22T03:25:59.194328182Z'
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ gcloud projects add-iam-policy-binding qwiklabs-gcp-04-74f941ebf170 \
+  --member "serviceAccount:service-412498475841@gcp-sa-multiclusteringress.iam.gserviceaccount.com" \
+  --role "roles/container.admin" \
+  --project=qwiklabs-gcp-04-74f941ebf170
+Updated IAM policy for project [qwiklabs-gcp-04-74f941ebf170].
+bindings:
+- members:
+  - serviceAccount:qwiklabs-gcp-04-74f941ebf170@qwiklabs-gcp-04-74f941ebf170.iam.gserviceaccount.com
+  role: roles/bigquery.admin
+- members:
+  - serviceAccount:412498475841@cloudbuild.gserviceaccount.com
+  role: roles/cloudbuild.builds.builder
+- members:
+  - serviceAccount:service-412498475841@gcp-sa-cloudbuild.iam.gserviceaccount.com
+  role: roles/cloudbuild.serviceAgent
+- members:
+  - user:student-02-aaf862ed9e59@qwiklabs.net
+  role: roles/compute.admin
+- members:
+  - serviceAccount:qwiklabs-gcp-04-74f941ebf170.svc.id.goog[gke-mcs/gke-mcs-importer]
+  role: roles/compute.networkViewer
+- members:
+  - serviceAccount:service-412498475841@compute-system.iam.gserviceaccount.com
+  role: roles/compute.serviceAgent
+- members:
+  - serviceAccount:service-412498475841@gcp-sa-multiclusteringress.iam.gserviceaccount.com
+  - user:student-02-aaf862ed9e59@qwiklabs.net
+  role: roles/container.admin
+- members:
+  - serviceAccount:service-412498475841@gcp-sa-gkenode.iam.gserviceaccount.com
+  role: roles/container.defaultNodeServiceAgent
+- members:
+  - serviceAccount:service-412498475841@container-engine-robot.iam.gserviceaccount.com
+  role: roles/container.serviceAgent
+- members:
+  - serviceAccount:412498475841-compute@developer.gserviceaccount.com
+  - serviceAccount:412498475841@cloudservices.gserviceaccount.com
+  role: roles/editor
+- members:
+  - user:student-02-aaf862ed9e59@qwiklabs.net
+  role: roles/gkehub.admin
+- members:
+  - serviceAccount:service-412498475841@gcp-sa-gkehub.iam.gserviceaccount.com
+  role: roles/gkehub.serviceAgent
+- members:
+  - user:student-02-aaf862ed9e59@qwiklabs.net
+  role: roles/iam.serviceAccountUser
+- members:
+  - user:student-02-aaf862ed9e59@qwiklabs.net
+  role: roles/logging.viewAccessor
+- members:
+  - serviceAccount:service-412498475841@gcp-sa-multiclusteringress.iam.gserviceaccount.com
+  role: roles/multiclusteringress.serviceAgent
+- members:
+  - serviceAccount:service-412498475841@gcp-sa-mcmetering.iam.gserviceaccount.com
+  role: roles/multiclustermetering.serviceAgent
+- members:
+  - serviceAccount:service-412498475841@gcp-sa-mcsd.iam.gserviceaccount.com
+  role: roles/multiclusterservicediscovery.serviceAgent
+- members:
+  - serviceAccount:service-412498475841@gcp-sa-networkconnectivity.iam.gserviceaccount.com
+  role: roles/networkconnectivity.serviceAgent
+- members:
+  - serviceAccount:admiral@qwiklabs-services-prod.iam.gserviceaccount.com
+  - serviceAccount:qwiklabs-gcp-04-74f941ebf170@qwiklabs-gcp-04-74f941ebf170.iam.gserviceaccount.com
+  role: roles/owner
+- members:
+  - user:student-02-aaf862ed9e59@qwiklabs.net
+  role: roles/resourcemanager.projectIamAdmin
+- members:
+  - user:student-02-aaf862ed9e59@qwiklabs.net
+  role: roles/serviceusage.serviceUsageAdmin
+- members:
+  - serviceAccount:qwiklabs-gcp-04-74f941ebf170@qwiklabs-gcp-04-74f941ebf170.iam.gserviceaccount.com
+  role: roles/storage.admin
+- members:
+  - user:student-02-aaf862ed9e59@qwiklabs.net
+  role: roles/viewer
+etag: BwZBtuTyfKE=
+version: 1
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ kubectl get gatewayclasses --context=cluster1
+NAME                                        CONTROLLER                                   ACCEPTED   AGE
+gke-l7-cross-regional-internal-managed-mc   networking.gke.io/gateway                    True       107s
+gke-l7-global-external-managed              networking.gke.io/gateway                    True       20m
+gke-l7-global-external-managed-mc           networking.gke.io/gateway                    True       107s
+gke-l7-gxlb                                 networking.gke.io/gateway                    True       20m
+gke-l7-gxlb-mc                              networking.gke.io/gateway                    True       107s
+gke-l7-regional-external-managed            networking.gke.io/gateway                    True       20m
+gke-l7-regional-external-managed-mc         networking.gke.io/gateway                    True       107s
+gke-l7-rilb                                 networking.gke.io/gateway                    True       20m
+gke-l7-rilb-mc                              networking.gke.io/gateway                    True       107s
+gke-passthrough-lb-external-managed         networking.gke.io/persistent-ip-controller   True       21m
+gke-passthrough-lb-internal-managed         networking.gke.io/persistent-ip-controller   True       21m
+gke-persistent-regional-external-managed    networking.gke.io/persistent-ip-controller   True       21m
+gke-persistent-regional-internal-managed    networking.gke.io/persistent-ip-controller   True       21m
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ kubectl get gatewayclasses --context=cluster1
+NAME                                        CONTROLLER                                   ACCEPTED   AGE
+gke-l7-cross-regional-internal-managed-mc   networking.gke.io/gateway                    True       114s
+gke-l7-global-external-managed              networking.gke.io/gateway                    True       20m
+gke-l7-global-external-managed-mc           networking.gke.io/gateway                    True       114s
+gke-l7-gxlb                                 networking.gke.io/gateway                    True       20m
+gke-l7-gxlb-mc                              networking.gke.io/gateway                    True       114s
+gke-l7-regional-external-managed            networking.gke.io/gateway                    True       20m
+gke-l7-regional-external-managed-mc         networking.gke.io/gateway                    True       114s
+gke-l7-rilb                                 networking.gke.io/gateway                    True       20m
+gke-l7-rilb-mc                              networking.gke.io/gateway                    True       114s
+gke-passthrough-lb-external-managed         networking.gke.io/persistent-ip-controller   True       21m
+gke-passthrough-lb-internal-managed         networking.gke.io/persistent-ip-controller   True       21m
+gke-persistent-regional-external-managed    networking.gke.io/persistent-ip-controller   True       21m
+gke-persistent-regional-internal-managed    networking.gke.io/persistent-ip-controller   True       21m
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ kubectl get gatewayclasses --context=cluster1
+NAME                                        CONTROLLER                                   ACCEPTED   AGE
+gke-l7-cross-regional-internal-managed-mc   networking.gke.io/gateway                    True       117s
+gke-l7-global-external-managed              networking.gke.io/gateway                    True       20m
+gke-l7-global-external-managed-mc           networking.gke.io/gateway                    True       117s
+gke-l7-gxlb                                 networking.gke.io/gateway                    True       20m
+gke-l7-gxlb-mc                              networking.gke.io/gateway                    True       117s
+gke-l7-regional-external-managed            networking.gke.io/gateway                    True       20m
+gke-l7-regional-external-managed-mc         networking.gke.io/gateway                    True       117s
+gke-l7-rilb                                 networking.gke.io/gateway                    True       20m
+gke-l7-rilb-mc                              networking.gke.io/gateway                    True       117s
+gke-passthrough-lb-external-managed         networking.gke.io/persistent-ip-controller   True       21m
+gke-passthrough-lb-internal-managed         networking.gke.io/persistent-ip-controller   True       21m
+gke-persistent-regional-external-managed    networking.gke.io/persistent-ip-controller   True       21m
+gke-persistent-regional-internal-managed    networking.gke.io/persistent-ip-controller   True       21m
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ cat <<EOF > store-deployment.yaml
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: store
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store
+  namespace: store
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: store
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: store
+        version: v1
+    spec:
+      containers:
+      - name: whereami
+        image: gcr.io/google-samples/whereami:v1.2.1
+        ports:
+          - containerPort: 8080
+EOF
+kubectl apply -f store-deployment.yaml --context=cluster2
+kubectl apply -f store-deployment.yaml --context=cluster3
+namespace/store created
+deployment.apps/store created
+namespace/store created
+deployment.apps/store created
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ kubectl get all -n store
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/store-679dbc87d5-2j7gz   1/1     Running   0          60s
+pod/store-679dbc87d5-nv8jr   1/1     Running   0          60s
+
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/store   2/2     2            2           61s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/store-679dbc87d5   2         2         2       62s
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ cat <<EOF > store-west-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: store
+  namespace: store
+spec:
+  selector:
+    app: store
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: store
+  namespace: store
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: store-west-2
+  namespace: store
+spec:
+  selector:
+    app: store
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: store-west-2
+  namespace: store
+EOF
+kubectl apply -f store-west-service.yaml --context=cluster2
+service/store created
+serviceexport.net.gke.io/store created
+service/store-west-2 created
+serviceexport.net.gke.io/store-west-2 created
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ cat <<EOF > store-east-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: store
+  namespace: store
+spec:
+  selector:
+    app: store
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: store
+  namespace: store
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: store-east-1
+  namespace: store
+spec:
+  selector:
+    app: store
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: store-east-1
+  namespace: store
+EOF
+kubectl apply -f store-east-service.yaml --context=cluster3
+service/store created
+serviceexport.net.gke.io/store created
+service/store-east-1 created
+serviceexport.net.gke.io/store-east-1 created
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ cat <<EOF > store-east-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: store
+  namespace: store
+spec:
+  selector:
+    app: store
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: store
+  namespace: store
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: store-east-1
+  namespace: store
+spec:
+  selector:
+    app: store
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: store-east-1
+  namespace: store
+EOF
+kubectl apply -f store-east-service.yaml --context=cluster3
+service/store unchanged
+serviceexport.net.gke.io/store unchanged
+service/store-east-1 unchanged
+serviceexport.net.gke.io/store-east-1 unchanged
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ kubectl get serviceexports --context cluster2 --namespace store
+kubectl get serviceexports --context cluster3 --namespace store
+NAME           AGE
+store          51s
+store-west-2   49s
+NAME           AGE
+store          27s
+store-east-1   26s
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ cat <<EOF > external-http-gateway.yaml
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: store
+---
+kind: Gateway
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: external-http
+  namespace: store
+spec:
+  gatewayClassName: gke-l7-gxlb-mc
+  listeners:
+  - name: http
+    protocol: HTTP
+    port: 80
+    allowedRoutes:
+      kinds:
+      - kind: HTTPRoute
+EOF
+kubectl apply -f external-http-gateway.yaml --context=cluster1
+namespace/store created
+gateway.gateway.networking.k8s.io/external-http created
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ cat <<EOF > public-store-route.yaml
+kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: public-store-route
+  namespace: store
+  labels:
+    gateway: external-http
+spec:
+  parentRefs:
+  - name: external-http
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /west
+    backendRefs:
+    - group: net.gke.io
+      kind: ServiceImport
+      name: store-west-2
+      port: 8080
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /east
+    backendRefs:
+    - group: net.gke.io
+      kind: ServiceImport
+      name: store-east-1
+      port: 8080
+  - backendRefs:
+    - group: net.gke.io
+      kind: ServiceImport
+      name: store
+      port: 8080
+EOF
+kubectl apply -f public-store-route.yaml --context=cluster1
+httproute.gateway.networking.k8s.io/public-store-route created
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ kubectl describe gateway external-http --context cluster1 --namespace store
+Name:         external-http
+Namespace:    store
+Labels:       <none>
+Annotations:  <none>
+API Version:  gateway.networking.k8s.io/v1
+Kind:         Gateway
+Metadata:
+  Creation Timestamp:  2025-10-22T03:31:12Z
+  Finalizers:
+    gateway.finalizer.networking.gke.io
+  Generation:        1
+  Resource Version:  1761103873045711017
+  UID:               51396d01-77f5-4aa0-99aa-ee448effc79b
+Spec:
+  Gateway Class Name:  gke-l7-gxlb-mc
+  Listeners:
+    Allowed Routes:
+      Kinds:
+        Group:  gateway.networking.k8s.io
+        Kind:   HTTPRoute
+      Namespaces:
+        From:  Same
+    Name:      http
+    Port:      80
+    Protocol:  HTTP
+Status:
+  Conditions:
+    Last Transition Time:  1970-01-01T00:00:00Z
+    Message:               Waiting for controller
+    Reason:                Pending
+    Status:                Unknown
+    Type:                  Accepted
+    Last Transition Time:  1970-01-01T00:00:00Z
+    Message:               Waiting for controller
+    Reason:                Pending
+    Status:                Unknown
+    Type:                  Programmed
+Events:
+  Type    Reason  Age   From                   Message
+  ----    ------  ----  ----                   -------
+  Normal  ADD     35s   mc-gateway-controller  store/external-http
+  Normal  UPDATE  34s   mc-gateway-controller  store/external-http
+  Normal  SYNC    24s   mc-gateway-controller  store/external-http
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ kubectl get gateway external-http -o=jsonpath="{.status.addresses[0].value}" --context cluster1 --namespace store | xargs echo -e
+
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ kubectl get gateway external-http -o=jsonpath="{.status.addresses[0].value}" --context cluster1 --namespace store | xargs echo -e
+34.8.81.2
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ EXTERNAL_IP=$(kubectl get gateway external-http -o=jsonpath="{.status.addresses[0].value}" --context cluster1 --namespace store)
+echo $EXTERNAL_IP
+34.8.81.2
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ curl http://${EXTERNAL_IP}
+curl: (52) Empty reply from server
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ curl http://${EXTERNAL_IP}
+curl: (56) Recv failure: Connection reset by peer
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ curl http://${EXTERNAL_IP}/west
+curl: (52) Empty reply from server
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ kubectl get gateway external-http -o=jsonpath="{.status.addresses[0].value}" --context cluster1 --namespace store | xargs echo -e
+34.8.81.2
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ curl 34.8.81.2
+curl: (52) Empty reply from server
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ curl http://${EXTERNAL_IP}/east
+curl: (52) Empty reply from server
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ kubectl describe gateway external-http --context cluster1 --namespace store
+Name:         external-http
+Namespace:    store
+Labels:       <none>
+Annotations:  networking.gke.io/addresses: /projects/412498475841/global/addresses/gkemcg1-store-external-http-laup24msshu4
+              networking.gke.io/backend-services:
+                /projects/412498475841/global/backendServices/gkemcg1-kube-system-gw-serve404-80-7cq0brelgzex, /projects/412498475841/global/backendServic...
+              networking.gke.io/firewalls: /projects/412498475841/global/firewalls/gkemcg1-l7-default-global
+              networking.gke.io/forwarding-rules: /projects/412498475841/global/forwardingRules/gkemcg1-store-external-http-a5et3e3itxsv
+              networking.gke.io/health-checks:
+                /projects/412498475841/global/healthChecks/gkemcg1-kube-system-gw-serve404-80-7cq0brelgzex, /projects/412498475841/global/healthChecks/gke...
+              networking.gke.io/last-reconcile-time: 2025-10-22T03:37:53Z
+              networking.gke.io/lb-route-extensions: 
+              networking.gke.io/lb-traffic-extensions: 
+              networking.gke.io/ssl-certificates: 
+              networking.gke.io/target-http-proxies: /projects/412498475841/global/targetHttpProxies/gkemcg1-store-external-http-94oqhkftu5yz
+              networking.gke.io/target-https-proxies: 
+              networking.gke.io/url-maps: /projects/412498475841/global/urlMaps/gkemcg1-store-external-http-94oqhkftu5yz
+              networking.gke.io/wasm-plugin-versions: 
+              networking.gke.io/wasm-plugins: 
+API Version:  gateway.networking.k8s.io/v1
+Kind:         Gateway
+Metadata:
+  Creation Timestamp:  2025-10-22T03:31:12Z
+  Finalizers:
+    gateway.finalizer.networking.gke.io
+  Generation:        1
+  Resource Version:  1761104273748271017
+  UID:               51396d01-77f5-4aa0-99aa-ee448effc79b
+Spec:
+  Gateway Class Name:  gke-l7-gxlb-mc
+  Listeners:
+    Allowed Routes:
+      Kinds:
+        Group:  gateway.networking.k8s.io
+        Kind:   HTTPRoute
+      Namespaces:
+        From:  Same
+    Name:      http
+    Port:      80
+    Protocol:  HTTP
+Status:
+  Addresses:
+    Type:   IPAddress
+    Value:  34.8.81.2
+  Conditions:
+    Last Transition Time:  2025-10-22T03:32:58Z
+    Message:               The OSS Gateway API has deprecated this condition, do not depend on it.
+    Observed Generation:   1
+    Reason:                Scheduled
+    Status:                True
+    Type:                  Scheduled
+    Last Transition Time:  2025-10-22T03:32:58Z
+    Message:               
+    Observed Generation:   1
+    Reason:                Accepted
+    Status:                True
+    Type:                  Accepted
+    Last Transition Time:  2025-10-22T03:37:53Z
+    Message:               
+    Observed Generation:   1
+    Reason:                Programmed
+    Status:                True
+    Type:                  Programmed
+    Last Transition Time:  2025-10-22T03:37:53Z
+    Message:               The OSS Gateway API has altered the "Ready" condition semantics and reserved it for future use.  GKE Gateway will stop emitting it in a future update, use "Programmed" instead.
+    Observed Generation:   1
+    Reason:                Ready
+    Status:                True
+    Type:                  Ready
+    Last Transition Time:  2025-10-22T03:37:53Z
+    Message:               
+    Observed Generation:   1
+    Reason:                Healthy
+    Status:                True
+    Type:                  networking.gke.io/GatewayHealthy
+  Listeners:
+    Attached Routes:  1
+    Conditions:
+      Last Transition Time:  2025-10-22T03:35:33Z
+      Message:               
+      Observed Generation:   1
+      Reason:                ResolvedRefs
+      Status:                True
+      Type:                  ResolvedRefs
+      Last Transition Time:  2025-10-22T03:35:33Z
+      Message:               
+      Observed Generation:   1
+      Reason:                Accepted
+      Status:                True
+      Type:                  Accepted
+      Last Transition Time:  2025-10-22T03:37:53Z
+      Message:               
+      Observed Generation:   1
+      Reason:                Programmed
+      Status:                True
+      Type:                  Programmed
+      Last Transition Time:  2025-10-22T03:37:53Z
+      Message:               The OSS Gateway API has altered the "Ready" condition semantics and reserved it for future use.  GKE Gateway will stop emitting it in a future update, use "Programmed" instead.
+      Observed Generation:   1
+      Reason:                Ready
+      Status:                True
+      Type:                  Ready
+    Name:                    http
+    Supported Kinds:
+      Group:  gateway.networking.k8s.io
+      Kind:   HTTPRoute
+Events:
+  Type     Reason  Age    From                   Message
+  ----     ------  ----   ----                   -------
+  Normal   ADD     9m5s   mc-gateway-controller  store/external-http
+  Warning  SYNC    7m18s  mc-gateway-controller  failed to translate Gateway "store/external-http": error getting ServiceImportConfig gw-serve404.kube-system: serviceimportconfigs.net.gke.io "gw-serve404.kube-system" not found
+error getting ServiceImportConfig gw-serve404.kube-system: serviceimportconfigs.net.gke.io "gw-serve404.kube-system" not found
+Error GWCER102: serviceimports kube-system/gw-serve404 not found.
+  Warning  SYNC    5m15s                   mc-gateway-controller  failed to translate Gateway "store/external-http": Error GWCER102: serviceimports kube-system/gw-serve404 not found.
+  Normal   UPDATE  2m57s (x3 over 9m4s)    mc-gateway-controller  store/external-http
+  Normal   SYNC    2m29s (x17 over 8m54s)  mc-gateway-controller  store/external-http
+  Normal   SYNC    2m24s (x2 over 2m57s)   mc-gateway-controller  SYNC on store/external-http was a success
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ curl http://${EXTERNAL_IP}
+
+{
+  "cluster_name": "cluster3", 
+  "host_header": "34.8.81.2", 
+  "node_name": "gke-cluster3-default-pool-5d191bdb-h2qc.us-central1-c.c.qwiklabs-gcp-04-74f941ebf170.internal", 
+  "pod_name": "store-679dbc87d5-2j7gz", 
+  "pod_name_emoji": "🧛🏾‍♀️", 
+  "project_id": "qwiklabs-gcp-04-74f941ebf170", 
+  "timestamp": "2025-10-22T03:40:59", 
+  "zone": "us-central1-c"
+}
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ 
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ curl http://${EXTERNAL_IP}/east
+{
+  "cluster_name": "cluster3", 
+  "host_header": "34.8.81.2", 
+  "node_name": "gke-cluster3-default-pool-5d191bdb-h2qc.us-central1-c.c.qwiklabs-gcp-04-74f941ebf170.internal", 
+  "pod_name": "store-679dbc87d5-2j7gz", 
+  "pod_name_emoji": "🧛🏾‍♀️", 
+  "project_id": "qwiklabs-gcp-04-74f941ebf170", 
+  "timestamp": "2025-10-22T03:41:04", 
+  "zone": "us-central1-c"
+}
+student_02_aaf862ed9e59@cloudshell:~ (qwiklabs-gcp-04-74f941ebf170)$ curl http://${EXTERNAL_IP}/west
+{
+  "cluster_name": "cluster2", 
+  "host_header": "34.8.81.2", 
+  "node_name": "gke-cluster2-default-pool-dc33614a-gc22.us-east1-c.c.qwiklabs-gcp-04-74f941ebf170.internal", 
+  "pod_name": "store-679dbc87d5-6h5fp", 
+  "pod_name_emoji": "😋", 
+  "project_id": "qwiklabs-gcp-04-74f941ebf170", 
+  "timestamp": "2025-10-22T03:41:08", 
+  "zone": "us-east1-c"
+}
